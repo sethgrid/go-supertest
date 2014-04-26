@@ -27,7 +27,7 @@ Let's say you set up a classic Martini sample application with the text, "Hello,
 
     	app := supertest.NewAppRunner("localhost:3000", wrapper)
 
-        // start you app
+        // start your app
     	app.Start()
 
     	// you can method chain and check headers, content, and status
