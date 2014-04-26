@@ -29,7 +29,7 @@ Let's say you set up a classic Martini sample application with the text, "Hello,
 
         // start you app
     	app.Start()
-    	
+
     	// you can method chain and check headers, content, and status
     	err := app.Get("/").
     		ExpectStatusCode("200 OK").
@@ -41,14 +41,14 @@ Let's say you set up a classic Martini sample application with the text, "Hello,
     		t.Error("Error Getting Root", err)
     	}
 
-	// or just check something indeed came up.
-	err = app.Get("/foo").ExpectStatusCode("200 OK").ExpectContent([]byte("bar")).End()
-	if err != nil {
-		t.Error("Error getting foo", err)
-	}
-	// or verify that it does not exist.
-	err = app.Get("/nonexistant").ExpectStatusCode("404 Not Found").End()
-	if err != nil {
-		t.Error("Error getting foo", err)
-	}
+	    // or just check something indeed came up.
+	    err = app.Get("/foo").ExpectStatusCode("200 OK").ExpectContent([]byte("bar")).End()
+	    if err != nil {
+		    t.Error("Error getting foo", err)
+	    }
+	    // or verify that it does not exist.
+	    err = app.Get("/nonexistant").ExpectStatusCode("404 Not Found").End()
+	    if err != nil {
+		    t.Error("Error getting foo", err)
+	    }
     }
