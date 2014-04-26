@@ -18,16 +18,19 @@ Let's say you set up a classic Martini sample application with the text, "Hello,
     	"testing"
     )
 
+    // to be passed into supertest
     func wrapper() {
     	go main()
     }
 
-    func TestGetContent2(t *testing.T) {
-    	supertest.Echo("Main Started")
+    func TestGetContent(t *testing.T) {
 
     	app := supertest.NewAppRunner("localhost:3000", wrapper)
 
+        // start you app
     	app.Start()
+    	
+    	// you can method chain and check headers, content, and status
     	err := app.Get("/").
     		ExpectStatusCode("200 OK").
     		ExpectHeader("Content-Type", "text/plain; charset=utf-8").
@@ -38,14 +41,14 @@ Let's say you set up a classic Martini sample application with the text, "Hello,
     		t.Error("Error Getting Root", err)
     	}
 
+	// or just check something indeed came up.
 	err = app.Get("/foo").ExpectStatusCode("200 OK").ExpectContent([]byte("bar")).End()
 	if err != nil {
 		t.Error("Error getting foo", err)
 	}
-
+	// or verify that it does not exist.
 	err = app.Get("/nonexistant").ExpectStatusCode("404 Not Found").End()
 	if err != nil {
 		t.Error("Error getting foo", err)
 	}
-
-}
+    }
